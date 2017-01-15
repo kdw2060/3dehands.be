@@ -1,0 +1,24 @@
+<h1 class="title">Advertenties</h1>
+    <section class="section">
+        <table class="table">
+          <tbody>
+            <table ng-repeat="ad in advertenties">
+            <tr>
+            <!-- Op onderstaande manier id proberen meegeven. De waarde wordt correct ingevuld, maar de functie werkt niet, nog verder te bestuderen.
+                <td><a href="#" class="titel"><h3 ng-click="goToDetail({{ad._id}})">{{ad.titel}}</h3></a></td>
+            -->
+                <td class="titel"><h3 ng-click="goToDetail()">{{ad.titel}}</h3></td>
+            </tr>
+              <tr>
+                <!--opm: foto nog niet geïmplementeerd-->
+                <td class="foto"><img src="{{ad.foto}}"></td>
+                <td class="beschrijving">{{ad.beschrijving}}</td>      
+              </tr>
+              <tr class="endofad">
+                  <td>{{ad.plaatser}}</td>
+                  <td><a href="{{ad.website}}">{{ad.website}}</a></td>
+              </tr>
+            </table>
+          </tbody>
+        </table>
+    </section>

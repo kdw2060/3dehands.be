@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>3deHands.be</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>
+    <script>
+      var app = angular.module("app", ['ngRoute']);
+      app.controller('MainController', function ($scope, $http, $location) {
+        
+          // een hoop objecten
+          $scope.advertenties = [];
+          $http.get("http://localhost:3000/api/getAds").success(function (res) {
+          $scope.advertenties = res;
+            });
+          
+          $scope.logindata = [{name: '', pass: ''}];
+          
+          $scope.nieuweAdvertentie = [{ titel:'', beschrijving:'', foto:'', website:'', plaatser:''}];
+          
+          $scope.ingelogd = false;
+          
+          // functies
+          
+            $scope.login = function() {
+                var loginNaam = $scope.logindata.name;
+                var paswoord = $scope.logindata.pass;
+                $http.post("http://localhost:3000/api/login",
+                { 'name': loginNaam, 'pass': paswoord }
+            ).success(function (res) {
+                    //checken of het om een bestaande account gaat gebeurt op server,
+                    //als ok dan zendt express de response 'true' en plaatsen we die op de ng-show variabele $scope.ingelogd
+                    if (res.message == 'true') {$scope.ingelogd = true;}
+                    if (res.message == 'false') {
+                        $scope.ingelogd = false;
+                        alert("Geen geldige login, probeer opnieuw");  }
+                });
+            }
+            
+            $scope.voegAdvertentieToe = function() {
+                var plaatser = $scope.logindata.name;
+                var titel = $scope.nieuweAdvertentie.titel;
+                var beschrijving = $scope.nieuweAdvertentie.beschrijving;
+                var web = $scope.nieuweAdvertentie.website;
+                console.log($scope.nieuweAdvertentie);
+                //foto later nog toe te voegen
+                $http.post("http://localhost:3000/api/plaatsAd", {
+                    'titel': titel , 'beschrijving' : beschrijving, 'website': web, 'plaatser': plaatser})
+                .success(function (res){
+                    //we verversen de view
+                      $http.get("http://localhost:3000/api/getAds").success(function (res) {
+                          $scope.advertenties = res;
+                        });
+                });
+            }
+            
+            $scope.goToDetail = function(){
+                //var id = $scope.ad._id;
+                var id = '1234465';
+                var urlDetailPagina = '/detail/' + id;
+                console.log(urlDetailPagina);
+                $location.path(urlDetailPagina);
+            }
+      });      
+        
+        // Directives
+        app.directive('loginblok', function(){
+            return {
+                restrict: 'AE',
+                replace: true,
+                templateUrl: 'login_placeAd.html',
+                controller: 'MainController'
+            };
+        });
+        
+        // Routing
+        app.config(function ($routeProvider){
+            $routeProvider
+                .when ('/', {
+                    templateUrl:'advertenties.html',
+                    controller: 'MainController'
+                })
+                .when ('/detail/:adID', {
+                    template: '<h1>Ik ben de detailpagina van een advertentie</h1><p><a href="#" onclick="history.back(-1)">Keer terug naar het overzicht</a></p>',
+                    controller: function($scope, $location, $routeParams) {
+                        var adID = $routeParams.adID;
+                        console.log(adID);
+                    }
+                })
+                .otherwise({ redirectTo : '/'});
+        });
+        
+      
+    </script>
+  </head>
+    
+  <body ng-app="app">
+        <img src="3dehands.png" class="headerpic">
+        <div ng-controller="MainController">
+        
+        <!--laad html template met login blok in via een custom directive-->
+        <loginblok></loginblok>
+    
+        <!--in de ng-view div komt het html template te staan dat via Angular routing wordt aangeleverd-->
+        <div ng-view></div>
+    
+    </div>
+  </body>
+</html>
+

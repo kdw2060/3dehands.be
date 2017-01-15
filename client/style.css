@@ -1,0 +1,40 @@
+.headerpic {
+
+}
+
+.plaatsAdForm {
+    width: 50%;
+}
+.plaatsAdForm input, .plaatsAdForm textarea {
+    width: 100%;
+}
+
+/*opmaak advertentietabel*/
+table:nth-child(even)  {
+    background-color: aliceblue;
+}
+
+table:nth-child(odd) {
+    background-color: darkseagreen;
+}
+table {
+    border-collapse: collapse;
+    width: 50vw;
+}
+.titel {
+    color: #4e4949;
+    text-decoration: none;
+}
+.titel:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+.foto {
+    width: 35%;
+}
+.beschrijving {
+    width: 65%;
+}
+.endofad {
+    border-bottom: solid 1px black;
+}

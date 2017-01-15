@@ -1,0 +1,9 @@
+<div>
+<h2>Log in (Login: Jef, pass: 1234)</h2>
+        
+<label>Loginnaam: </label><input type="text" ng-model="logindata.name">&nbsp;<label>Paswoord: </label><input type="text" ng-model="logindata.pass">&nbsp;<button ng-click="login(logindata)">Login</button>
+
+<h2>Advertentie toevoegen</h2>
+<p>Je moet ingelogd zijn om een advertentie te kunnen toevoegen.</p>
+<form class="plaatsAdForm" ng-show="ingelogd"><label>Titel van je advertentie: </label><input type="text" ng-model="nieuweAdvertentie.titel"><br><label>Beschrijving: </label><textarea rows="10" cols='50' ng-model="nieuweAdvertentie.beschrijving"></textarea><br><label>Weblink (jouw website of extra productinformatie): </label><input type="url" ng-model="nieuweAdvertentie.website"><br><label>Foto:</label>hier nog uploader voor foto<br><button ng-click="voegAdvertentieToe(nieuweAdvertentie)">Voeg toe</button></form>
+</div>
