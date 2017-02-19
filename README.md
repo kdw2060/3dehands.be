@@ -26,3 +26,8 @@ Laad localhost:3000
 Maak vervolgens in je mongoDB een gebruiker aan, zoals beschreven op regel 47 van *server.js*
 
 Je kunt beginnen met inloggen en het toevoegen van advertenties.
+
+##Screenshots
+![beeld1](screenshots/3dehands_screenshot1.png)
+
+![beeld2](screenshots/3dehands_screenshot2.png)
