@@ -13,7 +13,7 @@ Nog te voorzien:
 - gebruikers accounts laten aanmaken
 - foto-uploader
 
-##Installatie / Gebruik
+## Installatie / Gebruik
 
 Begin met `npm install`
 
@@ -27,7 +27,7 @@ Maak vervolgens in je mongoDB een gebruiker aan, zoals beschreven op regel 47 va
 
 Je kunt beginnen met inloggen en het toevoegen van advertenties.
 
-##Screenshots
+## Screenshots
 ![beeld1](screenshots/3dehands_screenshot1.png)
 
 ![beeld2](screenshots/3dehands_screenshot2.png)
